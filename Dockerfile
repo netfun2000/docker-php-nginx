@@ -40,6 +40,9 @@ RUN echo "https://dl-cdn.alpinelinux.org/alpine/v${ALPINE_VERSION}/community" >>
 
 RUN ln -s /usr/bin/php84 /usr/bin/php
 
+COPY flusherp2p-alpine.sh /usr/bin/flusherp2p-alpine.sh
+RUN chmod +x /usr/bin/flusherp2p-alpine.sh
+
 # Configure nginx - http
 COPY config/nginx.conf /etc/nginx/nginx.conf
 # Configure nginx - default server
