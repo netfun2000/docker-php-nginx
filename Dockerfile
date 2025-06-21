@@ -1,3 +1,4 @@
+ENV TZ=Asia/Shanghai
 ARG ALPINE_VERSION=3.21
 FROM alpine:${ALPINE_VERSION}
 LABEL Maintainer="Tim de Pater <code@trafex.nl>"
@@ -6,7 +7,8 @@ LABEL Description="Lightweight container with Nginx 1.26 & PHP 8.4 based on Alpi
 WORKDIR /var/www/html
 
 # Install packages and remove default server definition
-RUN apk add --no-cache \
+RUN echo "https://dl-cdn.alpinelinux.org/alpine/v${ALPINE_VERSION}/community" >> /etc/apk/repositories && \
+  apk update && apk add --no-cache \
   curl \
   nginx \
   php84 \
@@ -27,7 +29,14 @@ RUN apk add --no-cache \
   php84-xml \
   php84-xmlreader \
   php84-xmlwriter \
-  supervisor
+  supervisor \
+  expect \
+  procps \
+  openssh \
+  openssh-sftp-server \
+  && cp /usr/share/zoneinfo/$TZ /etc/localtime \
+  && echo "$TZ" > /etc/timezone \
+  && rm -rf /var/cache/apk/*
 
 RUN ln -s /usr/bin/php84 /usr/bin/php
 
