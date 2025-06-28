@@ -11,7 +11,7 @@ ARG ALPINE_VERSION
 WORKDIR /var/www/html
 
 # Install packages and remove default server definition
-RUN echo "https://dl-cdn.alpinelinux.org/alpine/v${ALPINE_VERSION}/community" >> /etc/apk/repositories && \
+RUN echo "https://dl-cdn.alpinelinux.org/alpine/v$ALPINE_VERSION/community" >> /etc/apk/repositories && \
   apk update && apk add --no-cache \
   curl \
   nginx \
