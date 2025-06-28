@@ -1,11 +1,11 @@
 ARG ALPINE_VERSION=3.21
 FROM alpine:${ALPINE_VERSION}
-ENV TZ=Asia/Shanghai
 LABEL Maintainer="Tim de Pater <code@trafex.nl>"
 LABEL Description="Lightweight container with Nginx 1.26 & PHP 8.4 based on Alpine Linux."
 
 # 重新声明ARG变量，使其在FROM之后的阶段可用
 ARG ALPINE_VERSION
+ENV TZ=Asia/Shanghai
 
 # Setup document root
 WORKDIR /var/www/html
